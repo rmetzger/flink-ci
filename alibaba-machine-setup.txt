@@ -1,0 +1,2 @@
+Install docker: https://github.com/NaturalHistoryMuseum/scratchpads2/wiki/Install-Docker-and-Docker-Compose-(Centos-7)
+Install latest git: https://computingforgeeks.com/how-to-install-latest-version-of-git-git-2-x-on-centos-7/
