@@ -10,7 +10,14 @@ RUN set -eux; \
 RUN useradd -ms /bin/bash user
 RUN echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-
+ENV JAVA_HOME_8_X64 "/usr/local/openjdk-8/"
 ENV MAVEN_CONFIG "/home/user/.m2"
-ENV JAVA_HOME_8_X64 "/usr/local/openjdk-8"
+
+# make the "mvn" command use gosu for running as 'user' by default
+# The Flink tests require non-root permissions for some file permissions tests
+RUN mv /usr/share/maven/bin/mvn /usr/share/maven/bin/vanilla-mvn
+RUN echo "#!/bin/sh" >> /usr/share/maven/bin/mvn
+RUN echo 'gosu user /usr/share/maven/bin/vanilla-mvn $@' >> /usr/share/maven/bin/mvn
+RUN chmod +x /usr/share/maven/bin/mvn
+
 WORKDIR /home/user/flink
