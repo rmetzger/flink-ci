@@ -16,8 +16,17 @@ ENV MAVEN_CONFIG "/home/user/.m2"
 # make the "mvn" command use gosu for running as 'user' by default
 # The Flink tests require non-root permissions for some file permissions tests
 RUN mv /usr/share/maven/bin/mvn /usr/share/maven/bin/vanilla-mvn
-RUN echo "#!/bin/sh" >> /usr/share/maven/bin/mvn
-RUN echo 'gosu user /usr/share/maven/bin/vanilla-mvn $@' >> /usr/share/maven/bin/mvn
+RUN printf '#!/bin/sh\n\
+if getent passwd vsts_azpcontainer > /dev/null 2>&1; then\n\
+    USER="vsts_azpcontainer"\n\
+else\n\
+    USER="user"\n\
+fi\n\
+whoami ; sudo whoami \n\
+echo "Running mvn as $USER. (See /usr/share/maven/bin/mvn for more details)"\n\
+sudo gosu $USER /usr/share/maven/bin/vanilla-mvn $@'\
+>> /usr/share/maven/bin/mvn
+
 RUN chmod +x /usr/share/maven/bin/mvn
 
 WORKDIR /home/user/flink
