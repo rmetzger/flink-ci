@@ -1,0 +1,43 @@
+#
+# Objective: On each push to this repository, build docker images
+# for the following architectures:
+# 
+#  ARMv7, amd64
+#
+# and the following JDKs:
+#
+# jdk8, jdk11
+#
+
+
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-18.04
+    name: "Build rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-<commit>"
+    strategy:
+      matrix:
+        architecture: ['aarch64', 'amd64']
+        jdk: ['jdk8', 'jdk11']
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u rmetzger --password-stdin
+    - uses: uraimo/run-on-arch-action@v1.0.5
+      id: runcmd
+      if: matrix.architecture == 'aarch64'
+      with:
+        architecture: aarch64
+        distribution: ubuntu18.04
+        run: |
+          uname -a
+          docker build . --file ${{ matrix.jdk }}.Dockerfile --tag rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-$(git rev-parse --short HEAD)
+          docker push rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-$(git rev-parse --short HEAD)
+    - name: Build & push the Docker image
+      if: matrix.architecture == 'amd64'
+      run: docker build . --file ${{ matrix.jdk }}.Dockerfile --tag rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-$(git rev-parse --short HEAD) ; docker push rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-$(git rev-parse --short HEAD)
