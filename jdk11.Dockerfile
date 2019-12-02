@@ -3,8 +3,15 @@ FROM ubuntu:xenial
 # install packages
 RUN set -eux; \
 	apt-get update; \
-	apt-get install -y gosu sudo locales make less git openjdk-11-jdk curl libapr1 unzip python docker.io; \
+	apt-get install -y gosu sudo locales make less git curl libapr1 unzip python docker.io wget software-properties-common apt-transport-https; \
 	rm -rf /var/lib/apt/lists/*;
+
+# Install Adopt JDK11
+RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - ; \
+    add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ ; \
+    apt update ; apt install adoptopenjdk-11-hotspot
+
+
 
 # Install maven
 ARG MAVEN_VERSION=3.2.5
