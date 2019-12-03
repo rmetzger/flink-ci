@@ -9,7 +9,7 @@ RUN set -eux; \
 # Install Adopt JDK11
 RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - ; \
     add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ ; \
-    apt update ; apt install adoptopenjdk-11-hotspot
+    apt update ; apt install -y adoptopenjdk-11-hotspot
 
 
 
