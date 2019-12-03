@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-18.04
     name: "Build rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-<commit>"
     strategy:
+      fail-fast: false
       matrix:
         architecture: ['aarch64', 'amd64']
         jdk: ['jdk8', 'jdk11']
@@ -35,6 +36,7 @@ jobs:
         architecture: aarch64
         distribution: ubuntu18.04
         run: |
+          sudo apt install docker.io git
           uname -a
           docker build . --file ${{ matrix.jdk }}.Dockerfile --tag rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-$(git rev-parse --short HEAD)
           docker push rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-$(git rev-parse --short HEAD)
