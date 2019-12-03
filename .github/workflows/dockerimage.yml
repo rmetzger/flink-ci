@@ -40,6 +40,7 @@ jobs:
           apt install -y docker.io git
           uname -a
           docker build . --file ${{ matrix.jdk }}.Dockerfile --tag rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-$(git rev-parse --short HEAD)
+          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u rmetzger --password-stdin
           docker push rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-$(git rev-parse --short HEAD)
     - name: Build & push the Docker image
       if: matrix.architecture == 'amd64'
