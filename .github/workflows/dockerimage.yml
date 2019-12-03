@@ -36,6 +36,7 @@ jobs:
         architecture: aarch64
         distribution: ubuntu18.04
         run: |
+          apt update
           apt install -y docker.io git
           uname -a
           docker build . --file ${{ matrix.jdk }}.Dockerfile --tag rmetzger/flink-ci:ubuntu-${{ matrix.jdk }}-${{ matrix.architecture }}-$(git rev-parse --short HEAD)
