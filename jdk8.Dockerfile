@@ -37,7 +37,8 @@ RUN echo "JAVA_HOME_8_X64=/usr/lib/jvm/java-8-openjdk-amd64" >> /etc/environment
 RUN echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /etc/environment
 #RUN echo "export PATH=/usr/local/openjdk-8/bin:$PATH" >> /home/user/.bashrc
 
-ENV JAVA_HOME_8_X64 "/usr/local/openjdk-8"
+ENV JAVA_HOME_8_X64 "/usr/lib/jvm/java-8-openjdk-amd64"
+ENV JAVA_HOME "/usr/lib/jvm/java-8-openjdk-amd64"
 #ENV MAVEN_CONFIG "/home/user/.m2"
 
 ## make the "mvn" command use gosu for running as 'user' by default
