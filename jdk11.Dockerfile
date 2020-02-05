@@ -3,7 +3,7 @@ FROM ubuntu:xenial
 # install packages
 RUN set -eux; \
 	apt-get update; \
-	apt-get install -y gosu sudo locales make less git curl libapr1 unzip uuid-runtime jq python docker.io wget software-properties-common apt-transport-https; \
+	apt-get install -y gosu sudo locales make less git curl libapr1 unzip uuid-runtime jq bsdmainutils python docker.io wget software-properties-common apt-transport-https; \
 	rm -rf /var/lib/apt/lists/*;
 
 # Install Adopt JDK11
