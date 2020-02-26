@@ -18,9 +18,9 @@ RUN echo "JAVA_HOME_8_X64=/usr/lib/jvm/java-8-openjdk-amd64" >> /etc/environment
 RUN echo "JAVA_HOME_11_X64=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64" >> /etc/environment
 RUN echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /etc/environment
 RUN update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
-RUN update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/javac
-RUN update-alternatives --set jps /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/jps
-RUN update-alternatives --set jstack /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/jstack
+RUN update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
+RUN update-alternatives --set jps /usr/lib/jvm/java-8-openjdk-amd64/bin/jps
+RUN update-alternatives --set jstack /usr/lib/jvm/java-8-openjdk-amd64/bin/jstack
 
 
 ENV JAVA_HOME_8_X64 "/usr/lib/jvm/java-8-openjdk-amd64"
