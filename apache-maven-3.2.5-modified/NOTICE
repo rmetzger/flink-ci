@@ -1,0 +1,20 @@
+===== ABOUT THIS DISTRIBUTION: =====
+
+All files in this directory are based on a vanilla Apache Maven 3.2.5 binary distribution. The following files have been copied from a vanilla Apache Maven 3.5.4 distribution:
+- lib/jcl-over-slf4j-1.7.25.jar
+- lib/jcl-over-slf4j.license
+- lib/wagon-http-3.1.0-shaded.jar  
+- lib/wagon-http.license
+
+The Maven 3.2.5 wagon-http* files are located in "backup/".
+
+
+===== COPY OF THE ORIGINAL NOTICE FILE: =====
+
+Apache Maven Distribution
+Copyright 2001-2014 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+
