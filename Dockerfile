@@ -22,7 +22,6 @@ RUN update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
 RUN update-alternatives --set jps /usr/lib/jvm/java-8-openjdk-amd64/bin/jps
 RUN update-alternatives --set jstack /usr/lib/jvm/java-8-openjdk-amd64/bin/jstack
 
-
 ENV JAVA_HOME_8_X64 "/usr/lib/jvm/java-8-openjdk-amd64"
 ENV JAVA_HOME_11_X64 "/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64"
 ENV JAVA_HOME "/usr/lib/jvm/java-8-openjdk-amd64"
@@ -40,10 +39,8 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 
 ENV MAVEN_HOME /usr/share/maven
 
-
 # Use UTF-8
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen ; locale-gen ; update-locale en_US.UTF-8
 ENV LC_ALL "en_US.UTF-8"
 ENV LANG "en_US.UTF-8"
 ENV LANGUAGE "en_US.UTF-8"
-
