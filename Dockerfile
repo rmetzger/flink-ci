@@ -37,6 +37,17 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && rm -f /tmp/apache-maven.tar.gz \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
+# put custom http-wagon. More details: https://issues.apache.org/jira/browse/FLINK-16947?focusedCommentId=17285028&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-17285028
+RUN cd /usr/share/maven/lib/ \
+  && rm wagon-http-*-shaded.jar \
+  && curl -O https://jitpack.io/com/github/lhotari/maven-wagon/wagon-http/5ff79d284/wagon-http-5ff79d284-shaded.jar
+
+# add commons logging (needed for custom wagon)
+RUN cd /tmp \
+  && wget https://mirror.synyx.de/apache//commons/logging/binaries/commons-logging-1.2-bin.zip \
+  && unzip commons-logging-1.2-bin.zip \
+  && cp commons-logging-1.2/commons-logging-1.2.jar /usr/share/maven/lib/
+
 ENV MAVEN_HOME /usr/share/maven
 
 # Use UTF-8
