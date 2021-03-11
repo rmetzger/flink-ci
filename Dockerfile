@@ -40,7 +40,7 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 # put custom http-wagon. More details: https://issues.apache.org/jira/browse/FLINK-16947?focusedCommentId=17285028&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-17285028
 RUN cd /usr/share/maven/lib/ \
   && rm wagon-http-*-shaded.jar \
-  && curl -O https://jitpack.io/com/github/lhotari/maven-wagon/wagon-http/5ff79d284/wagon-http-5ff79d284-shaded.jar
+  && curl -O https://repo1.maven.org/maven2/org/apache/maven/wagon/wagon-http/3.4.3/wagon-http-3.4.3-shaded.jar
 
 # add commons logging (needed for custom wagon)
 RUN cd /tmp \
