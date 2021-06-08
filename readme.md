@@ -15,7 +15,7 @@ docker push rmetzger/flink-ci:latest
 # Running
 
 ```
-docker run -it -v `pwd`/flink:/home/user/flink -v `pwd`/m2:/home/user/.m2  rmetzger/flink-ci mvn clean install
+docker run -it -v `pwd`/flink:/home/user/flink -v `pwd`/.m2:/home/user/.m2  rmetzger/flink-ci mvn clean install
 ```
 
 Explore running container by `docker ps` and `docker exec -it dc3ddc078bc8 bash`
